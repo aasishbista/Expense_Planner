@@ -7,6 +7,19 @@ class NewTransaction extends StatelessWidget {
 
   NewTransaction(this.newTransactionAdded);
 
+  void dataSubmitted() {
+    String enteredTitle = titleController.text;
+    double enteredAmount = double.parse(amountController.text);
+//Validation for amount and title.
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      print("Invalid input");
+      return;
+    }
+    //If validation is not satisfied newTransactionAdded willl not be called.
+    newTransactionAdded(enteredTitle, enteredAmount);
+    print("Hello");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,30 +32,18 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: "Title"),
               controller: titleController,
-              // onChanged: (value) {
-              //   titleInput = value;
-              // },
+              onSubmitted: (_) {
+                dataSubmitted();
+              },
             ),
             TextField(
               decoration: InputDecoration(labelText: "Amount"),
               controller: amountController,
-              // onChanged: (value) {
-              //   // amountInput = value;
-              //   amountController.text = value
-              // },
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              onSubmitted: (_) => dataSubmitted(),
             ),
             TextButton(
-              onPressed: () {
-                newTransactionAdded(
-                    titleController.text, double.parse(amountController.text));
-                // newTransactionAdded();
-                print("Hello");
-                // print(titleController.text);
-                // print(amountController.text);
-
-                // print(titleInput);sdd
-                // print(amountInput);
-              },
+              onPressed: dataSubmitted,
               child: Text('Add Transaction'),
               style: TextButton.styleFrom(primary: Colors.purple),
             )

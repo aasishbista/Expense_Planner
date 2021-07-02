@@ -25,26 +25,43 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Expense Planner"),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.add,
+                color: Colors.white,
+              ))
+        ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              // padding: EdgeInsets.all(20),
-              child: Card(
-                // margin: EdgeInsets.all(10),
-                child: Text(
-                  'Chart',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      // Whole body must be wrapped by SingleChildScrollView to prevent
+      // overflow caused by keyboard as keyboard takes textfield height as padding.
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                // padding: EdgeInsets.all(20),
+                child: Card(
+                  // margin: EdgeInsets.all(10),
+                  child: Text(
+                    'Chart',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  elevation: 10,
                 ),
-                elevation: 10,
               ),
-            ),
-            UserTransaction(),
-          ],
+              UserTransaction(),
+            ],
+          ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

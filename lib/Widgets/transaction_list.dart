@@ -3,15 +3,19 @@ import 'package:intl/intl.dart';
 import 'package:real_expense_planner/models/transaction.dart';
 
 class TransactonList extends StatelessWidget {
-  final List<Transaction> _userTransactionList;
+  final List<Transaction> _transactionList;
 
-  TransactonList(this._userTransactionList);
+  TransactonList(this._transactionList);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ..._userTransactionList.map((transaction) {
+    // ListView.builder should be used instead of ListView as it helps
+    //to optimize memory and improves app performance.
+    //It does not render invisible widgets like Row,Column,Container so less meemory is used.
+    return Container(
+      height: 350,
+      child: ListView.builder(
+        itemBuilder: (context, index) {
           return Card(
             elevation: 20,
             margin: EdgeInsets.all(5),
@@ -31,7 +35,8 @@ class TransactonList extends StatelessWidget {
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.purple, width: 2)),
                         child: Text(
-                          "\$${transaction.amount}",
+                          //toStringAsFixed helps to round off the decimal numbers (2 decimal places in this case).
+                          "\$${_transactionList[index].amount.toStringAsFixed(2)}",
                           style: TextStyle(
                               color: Colors.purple,
                               fontSize: 20,
@@ -42,12 +47,13 @@ class TransactonList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            transaction.title,
+                            _transactionList[index].title,
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            DateFormat.yMMMMd().format(transaction.date),
+                            DateFormat.yMMMMd()
+                                .format(_transactionList[index].date),
                             // DateFormat('yyyy-MM-dd')
                             // .format(transaction.date),
                             // transaction.date.toString(),
@@ -61,8 +67,9 @@ class TransactonList extends StatelessWidget {
               ),
             ),
           );
-        }).toList()
-      ],
+        },
+        itemCount: _transactionList.length,
+      ),
     );
   }
 }
