@@ -40,9 +40,10 @@ class TransactonList extends StatelessWidget {
                           //toStringAsFixed helps to round off the decimal numbers (2 decimal places in this case).
                           "\$${_transactionList[index].amount.toStringAsFixed(2)}",
                           style: TextStyle(
-                              color: Theme.of(context).primaryColorDark,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                            color: Theme.of(context).primaryColorDark,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Column(

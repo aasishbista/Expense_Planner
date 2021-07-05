@@ -18,13 +18,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
         accentColor: Colors.amber,
         fontFamily: 'Quicksand',
+        scaffoldBackgroundColor: Colors.grey,
         textTheme: ThemeData.light().textTheme.copyWith(
               headline6: TextStyle(
-                  fontFamily: "Oswald",
+                  fontFamily: 'Oswald',
                   fontSize: 18,
-                  fontWeight: FontWeight.normal),
+                  fontWeight: FontWeight.bold),
               headline4: TextStyle(
-                fontFamily: "Opensans",
+                fontFamily: "OpenSans",
                 fontSize: 20,
                 fontWeight: FontWeight.normal,
               ),
