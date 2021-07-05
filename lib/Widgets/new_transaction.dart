@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+// NewTransaction
+class NewTransaction extends StatefulWidget {
   final Function newTransactionAdded;
 
   NewTransaction(this.newTransactionAdded);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   void dataSubmitted() {
     String enteredTitle = titleController.text;
@@ -16,7 +24,11 @@ class NewTransaction extends StatelessWidget {
       return;
     }
     //If validation is not satisfied newTransactionAdded willl not be called.
-    newTransactionAdded(enteredTitle, enteredAmount);
+    widget.newTransactionAdded(enteredTitle, enteredAmount);
+
+// Helps to close modal sheet automatically after data is submitted.
+//Closes the topmost screen which is modal sheet in this case.
+    Navigator.of(context).pop();
     print("Hello");
   }
 
