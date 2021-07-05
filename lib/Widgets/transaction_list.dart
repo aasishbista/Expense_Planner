@@ -33,12 +33,14 @@ class TransactonList extends StatelessWidget {
                         margin:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.purple, width: 2)),
+                            border: Border.all(
+                                color: Theme.of(context).primaryColor,
+                                width: 2)),
                         child: Text(
                           //toStringAsFixed helps to round off the decimal numbers (2 decimal places in this case).
                           "\$${_transactionList[index].amount.toStringAsFixed(2)}",
                           style: TextStyle(
-                              color: Colors.purple,
+                              color: Theme.of(context).primaryColorDark,
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
@@ -48,8 +50,7 @@ class TransactonList extends StatelessWidget {
                         children: [
                           Text(
                             _transactionList[index].title,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.headline6,
                           ),
                           Text(
                             DateFormat.yMMMMd()

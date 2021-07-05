@@ -14,6 +14,32 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       home: MyHomePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
+        fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline6: TextStyle(
+                  fontFamily: "Oswald",
+                  fontSize: 18,
+                  fontWeight: FontWeight.normal),
+              headline4: TextStyle(
+                fontFamily: "Opensans",
+                fontSize: 20,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                headline6: TextStyle(
+                    fontFamily: "Quicksand",
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+        ),
+        //
+      ),
     );
   }
 }
@@ -70,7 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Expense Planner"),
+        title: Text(
+          "Expense Planner",
+        ),
         actions: [
           IconButton(
             onPressed: () => _startAddNewTransaction(context),
@@ -95,6 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     'Chart',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    // style: Theme.of(context).textTheme.title,
                   ),
                   elevation: 10,
                 ),
