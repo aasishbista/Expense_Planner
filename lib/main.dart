@@ -12,35 +12,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "Expense Plannner",
       home: MyHomePage(),
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
-        fontFamily: 'Quicksand',
-        scaffoldBackgroundColor: Colors.grey,
-        textTheme: ThemeData.light().textTheme.copyWith(
-              headline6: TextStyle(
-                  fontFamily: 'Oswald',
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-              headline4: TextStyle(
-                fontFamily: "OpenSans",
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-
-        appBarTheme: AppBarTheme(
+          primarySwatch: Colors.purple,
+          accentColor: Colors.pink[200],
+          fontFamily: "Oswald",
+          scaffoldBackgroundColor: Colors.purple[100],
           textTheme: ThemeData.light().textTheme.copyWith(
-                headline6: TextStyle(
-                    fontFamily: "Quicksand",
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-        ),
-        //
-      ),
+              headline6: TextStyle(
+                  fontFamily: "OpenSans",
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold)),
+          appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(
+                  headline6: TextStyle(
+                      fontFamily: "OpenSans",
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)))),
     );
   }
 }
@@ -121,11 +110,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 // padding: EdgeInsets.all(20),
                 child: Card(
                   // margin: EdgeInsets.all(10),
-                  child: Text(
-                    'Chart',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    // style: Theme.of(context).textTheme.title,
-                  ),
+                  child: Text('Chart',
+                      // style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.headline6),
                   elevation: 10,
                 ),
               ),
