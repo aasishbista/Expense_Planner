@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:real_expense_planner/Widgets/new_transaction.dart';
 import 'package:real_expense_planner/Widgets/transaction_list.dart';
 import 'models/transaction.dart';
+import './widgets/chart.dart';
 
 void main() {
   runApp(MyApp());
@@ -69,6 +70,19 @@ class _MyHomePageState extends State<MyHomePage> {
     // Transaction(id: "2", title: "New tie", amount: 10.99, date: DateTime.now())
   ];
 
+//only transactions which are younger than seven days trsactions are included
+//last seven days transactions.
+//where gives iterable which must be converted to List.
+  List<Transaction> get _recentTransactions {
+    return _userTransactionsList.where((transaction) {
+      return transaction.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTransaction = Transaction(
         id: DateTime.now().toString(),
@@ -105,17 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Center(
           child: Column(
             children: [
-              Container(
-                width: double.infinity,
-                // padding: EdgeInsets.all(20),
-                child: Card(
-                  // margin: EdgeInsets.all(10),
-                  child: Text('Chart',
-                      // style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      style: Theme.of(context).textTheme.headline6),
-                  elevation: 10,
-                ),
-              ),
+              Chart(_recentTransactions),
               TransactonList(_userTransactionsList),
             ],
           ),

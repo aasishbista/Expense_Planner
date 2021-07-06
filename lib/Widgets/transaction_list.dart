@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '/Widgets/no_transaction.dart';
 import 'package:real_expense_planner/models/transaction.dart';
 
 class TransactonList extends StatelessWidget {
@@ -15,28 +16,7 @@ class TransactonList extends StatelessWidget {
     return Container(
         height: 350,
         child: _transactionList.isEmpty
-            ? Column(
-                children: [
-                  Card(
-                    margin: EdgeInsets.all(20),
-                    color: Colors.blue[100],
-                    child: Text(
-                      "No any transactions yet!",
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Container(
-                    height: 200,
-                    child: Image.asset(
-                      "Assets/images/waiting.png",
-                      fit: BoxFit.cover,
-                    ),
-                  )
-                ],
-              )
+            ? NoTransaction()
             : ListView.builder(
                 itemBuilder: (context, index) {
                   return Card(
