@@ -70,10 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // Transaction(id: "2", title: "New tie", amount: 10.99, date: DateTime.now())
   ];
 
-//only transactions which are younger than seven days trsactions are included
-//last seven days transactions.
-//where gives iterable which must be converted to List.
-  List<Transaction> get _recentTransactions {
+//To filter out last seven days transactions
+  List<Transaction> get _recentSevenDaysTransactions {
     return _userTransactionsList.where((transaction) {
       return transaction.date.isAfter(
         DateTime.now().subtract(
@@ -82,6 +80,19 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }).toList();
   }
+
+//only transactions which are younger than seven days trsactions are included
+//last seven days transactions.
+//where gives iterable which must be converted to List.
+  // List<Transaction> get _recentTransactions {
+  //   return _userTransactionsList.where((transaction) {
+  //     return transaction.date.isAfter(
+  //       DateTime.now().subtract(
+  //         Duration(days: 7),
+  //       ),
+  //     );
+  //   }).toList();
+  // }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTransaction = Transaction(
@@ -119,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Center(
           child: Column(
             children: [
-              Chart(_recentTransactions),
+              Chart(_recentSevenDaysTransactions),
               TransactonList(_userTransactionsList),
             ],
           ),
