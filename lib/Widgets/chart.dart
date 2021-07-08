@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/models/transaction.dart';
 import 'package:intl/intl.dart';
+import 'chart_bar.dart';
 
 class Chart extends StatelessWidget {
   ///last sev days transactions
@@ -8,10 +9,13 @@ class Chart extends StatelessWidget {
   Chart(this.recentWeekTransactions);
 
   List<Map<String, Object>> get groupedTransactionsByWeekDay {
+    //weekDay is date and time of each transaction.
     return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(Duration(days: index));
       double totalEachWeekDaySum = 0.0;
 
+// If condition is used to check if the transaction we are looking at
+      // in recentWeekTransaction happened today.
       for (var i = 0; i < recentWeekTransactions.length; i++) {
         if (recentWeekTransactions[i].date.day == weekDay.day &&
             recentWeekTransactions[i].date.month == weekDay.month &&
@@ -22,9 +26,17 @@ class Chart extends StatelessWidget {
       print(weekDay);
       print(totalEachWeekDaySum);
       return {
-        "day": DateFormat.E().format(weekDay),
+        //DateFormat.E() helps to give shortcut of each weekday.
+        "day": DateFormat.E().format(weekDay).substring(0, 2),
         "amount": totalEachWeekDaySum
       };
+    });
+  }
+
+//Fold function is similar to reduce function in JavaScript.
+  double get weeklyTotalSpending {
+    return groupedTransactionsByWeekDay.fold(0.0, (sum, item) {
+      return sum += item['amount'];
     });
   }
 
@@ -32,60 +44,30 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     print(groupedTransactionsByWeekDay);
     return Container(
+      // padding: EdgeInsets.all(5),
       child: Card(
-        child: Row(
-          children: [],
+        //Padding can be used instead of container if you just want to introduce some padding.
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ...groupedTransactionsByWeekDay.map((data) {
+                //Flexible helps to equally space items even if items are large
+                return Flexible(
+                  fit: FlexFit.tight,
+                  child: ChartBar(
+                    percentOfTotalSpending:
+                        ((data['amount'] as double) / weeklyTotalSpending),
+                    totalSpentAmount: data['amount'],
+                    weekDayLabel: data['day'],
+                  ),
+                );
+              }).toList()
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-/*
-class Chart extends StatelessWidget {
-  final List<Transaction> recentWeekTransactions;
-
-  Chart(this.recentWeekTransactions);
-
-  List<Map<String, Object>> get groupedTransactions {
-    return List.generate(7, (index) {
-      //weekDay is date and time of each transaction.
-      final weekDay = DateTime.now().subtract(Duration(days: index));
-
-      double totalSumofEachWeekDay = 0.0;
-
-      for (var i = 0; i < recentWeekTransactions.length; i++) {
-        // If condition is used to check if the transaction we are looking at
-        // in recentWeekTransaction happened today.
-        if (recentWeekTransactions[i].date.day == weekDay.day &&
-            recentWeekTransactions[i].date.month == weekDay.month &&
-            recentWeekTransactions[i].date.year == weekDay.year) {
-          totalSumofEachWeekDay += recentWeekTransactions[i].amount;
-        }
-      }
-      print(DateFormat.E().format(weekDay));
-      print(totalSumofEachWeekDay);
-
-      return {
-        //DateFormat.E() helps to give shortcut of each weekday.
-        'day': DateFormat.E().format(weekDay),
-        "amount": totalSumofEachWeekDay,
-      };
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    print(groupedTransactions);
-    return Container(
-      child: Card(
-        elevation: 20,
-        child: Row(
-          children: [
-            for (var tx in recentWeekTransactions) Text(tx.date.toString())
-          ],
-        ),
-      ),
-    );
-  }
-}*/

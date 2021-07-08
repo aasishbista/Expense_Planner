@@ -72,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 //To filter out last seven days transactions
   List<Transaction> get _recentSevenDaysTransactions {
+    //where gives iterable which must be converted to List.
     return _userTransactionsList.where((transaction) {
       return transaction.date.isAfter(
         DateTime.now().subtract(
@@ -80,19 +81,6 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }).toList();
   }
-
-//only transactions which are younger than seven days trsactions are included
-//last seven days transactions.
-//where gives iterable which must be converted to List.
-  // List<Transaction> get _recentTransactions {
-  //   return _userTransactionsList.where((transaction) {
-  //     return transaction.date.isAfter(
-  //       DateTime.now().subtract(
-  //         Duration(days: 7),
-  //       ),
-  //     );
-  //   }).toList();
-  // }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTransaction = Transaction(
@@ -126,13 +114,17 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       // Whole body must be wrapped by SingleChildScrollView to prevent
       // overflow caused by keyboard as keyboard takes textfield height as padding.
+
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
-            children: [
-              Chart(_recentSevenDaysTransactions),
-              TransactonList(_userTransactionsList),
-            ],
+          child: Container(
+            padding: EdgeInsets.all(7),
+            child: Column(
+              children: [
+                Chart(_recentSevenDaysTransactions),
+                TransactonList(_userTransactionsList),
+              ],
+            ),
           ),
         ),
       ),
