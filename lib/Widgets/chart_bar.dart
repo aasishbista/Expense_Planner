@@ -46,7 +46,14 @@ class ChartBar extends StatelessWidget {
         ),
         //FittedBox helps to forcefully fit an item withina single line.
         //especially for large text.
-        FittedBox(child: Text("\$${totalSpentAmount.toStringAsFixed(0)}"))
+        Container(
+          height: 15,
+          child: FittedBox(
+              child: Container(
+                  child: Text(
+            "\$${totalSpentAmount.toStringAsFixed(0)}",
+          ))),
+        )
       ],
     );
   }

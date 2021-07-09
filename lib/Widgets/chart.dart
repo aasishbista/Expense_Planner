@@ -8,6 +8,8 @@ class Chart extends StatelessWidget {
   final List<Transaction> recentWeekTransactions;
   Chart(this.recentWeekTransactions);
 
+// groupedTransactionsByWeekDay is a List of Map(i.e. Key Value pair)
+//containing days and amount spent in the day.
   List<Map<String, Object>> get groupedTransactionsByWeekDay {
     //weekDay is date and time of each transaction.
     return List.generate(7, (index) {
@@ -44,26 +46,29 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     print(groupedTransactionsByWeekDay);
     return Container(
-      // padding: EdgeInsets.all(5),
       child: Card(
+        elevation: 10,
         //Padding can be used instead of container if you just want to introduce some padding.
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ...groupedTransactionsByWeekDay.map((data) {
-                //Flexible helps to equally space items even if items are large
-                return Flexible(
-                  fit: FlexFit.tight,
-                  child: ChartBar(
-                    percentOfTotalSpending:
-                        ((data['amount'] as double) / weeklyTotalSpending),
-                    totalSpentAmount: data['amount'],
-                    weekDayLabel: data['day'],
-                  ),
-                );
-              }).toList()
+              ...groupedTransactionsByWeekDay
+                  .map((data) {
+                    //Flexible helps to equally space items even if items are large
+                    return Flexible(
+                      fit: FlexFit.tight,
+                      child: ChartBar(
+                        percentOfTotalSpending:
+                            ((data['amount'] as double) / weeklyTotalSpending),
+                        totalSpentAmount: data['amount'],
+                        weekDayLabel: data['day'],
+                      ),
+                    );
+                  })
+                  .toList()
+                  .reversed
             ],
           ),
         ),

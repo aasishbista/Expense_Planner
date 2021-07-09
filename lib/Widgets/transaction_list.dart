@@ -20,57 +20,30 @@ class TransactonList extends StatelessWidget {
             : ListView.builder(
                 itemBuilder: (context, index) {
                   return Card(
-                    elevation: 20,
                     margin: EdgeInsets.all(5),
-                    child: Container(
-                      // padding:
-                      //     EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      width: double.infinity,
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(5),
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Theme.of(context).primaryColor,
-                                        width: 2)),
-                                child: Text(
-                                  //toStringAsFixed helps to round off the decimal numbers (2 decimal places in this case).
-                                  "\$${_transactionList[index].amount.toStringAsFixed(2)}",
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColorDark,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    _transactionList[index].title,
-                                    style:
-                                        Theme.of(context).textTheme.headline6,
-                                  ),
-                                  Text(
-                                    DateFormat.yMMMMd()
-                                        .format(_transactionList[index].date),
-                                    // DateFormat('yyyy-MM-dd')
-                                    // .format(transaction.date),
-                                    // transaction.date.toString(),
-                                    style: TextStyle(
-                                        fontSize: 12, color: Colors.grey),
-                                  )
-                                ],
-                              )
-                            ],
-                          )
-                        ],
+                    elevation: 10,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10,
+                      ),
+                      child: ListTile(
+                        // dense: true,
+                        leading: CircleAvatar(
+                          maxRadius: 30,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: FittedBox(
+                              child:
+                                  Text('\$${_transactionList[index].amount}'),
+                            ),
+                          ),
+                        ),
+                        title: Text(
+                          '${_transactionList[index].title}',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        subtitle: Text(
+                            '${DateFormat.yMMMMd().format(_transactionList[index].date)}'),
                       ),
                     ),
                   );
