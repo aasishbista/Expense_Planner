@@ -47,6 +47,7 @@ class ChartBar extends StatelessWidget {
         //FittedBox helps to forcefully fit an item withina single line.
         //especially for large text.
         Container(
+          //height must be set to horizontally align the bars i same line incase of large numbers
           height: 15,
           child: FittedBox(
               child: Container(
