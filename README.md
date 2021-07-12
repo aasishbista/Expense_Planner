@@ -5,6 +5,8 @@
 
 ![expensePlanner](https://user-images.githubusercontent.com/65438833/125024032-bc63a180-e09f-11eb-8ef4-136a60706954.gif)
 
+![5g7k6a](https://user-images.githubusercontent.com/65438833/125273802-057c5580-e32d-11eb-87b2-37e560f8fbcd.gif)
+
 
 
 ## Getting Started
