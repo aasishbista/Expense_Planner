@@ -5,6 +5,8 @@
 
 ![expensePlanner](https://user-images.githubusercontent.com/65438833/125024032-bc63a180-e09f-11eb-8ef4-136a60706954.gif)
 
+![5g7jpj](https://user-images.githubusercontent.com/65438833/125272880-0eb8f280-e32c-11eb-9f25-8dda39981369.gif)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
