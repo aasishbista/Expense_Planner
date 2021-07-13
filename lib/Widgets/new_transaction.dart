@@ -76,7 +76,11 @@ class _NewTransactionState extends State<NewTransaction> {
             TextFormField(
               cursorColor: Colors.pink,
               decoration: InputDecoration(
-                icon: Icon(Icons.title_sharp),
+                icon: Icon(
+                  Icons.title_sharp,
+                  color: Theme.of(context).primaryColor,
+                ),
+
                 suffixIcon: Icon(Icons.check_circle),
                 labelText: "Title",
                 labelStyle: TextStyle(color: Theme.of(context).primaryColor),
@@ -105,7 +109,10 @@ class _NewTransactionState extends State<NewTransaction> {
                   labelStyle: TextStyle(color: Theme.of(context).primaryColor),
                   helperText: "Transaction Amount",
                   // helperStyle: TextStyle(color: Theme.of(context).primaryColor),
-                  icon: Icon(Icons.monetization_on),
+                  icon: Icon(
+                    Icons.monetization_on,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   suffixIcon: Icon(Icons.check_circle),
                   enabledBorder: UnderlineInputBorder(
                       borderSide:
