@@ -105,7 +105,10 @@ class _NewTransactionState extends State<NewTransaction> {
                   labelStyle: TextStyle(color: Theme.of(context).primaryColor),
                   helperText: "Transaction Amount",
                   // helperStyle: TextStyle(color: Theme.of(context).primaryColor),
-                  icon: Icon(Icons.monetization_on),
+                  icon: Icon(
+                    Icons.monetization_on,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   suffixIcon: Icon(Icons.check_circle),
                   enabledBorder: UnderlineInputBorder(
                       borderSide:
