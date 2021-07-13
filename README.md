@@ -3,6 +3,8 @@
 ## A new Flutter project which can be run on both iOS and android platforms.
 #### 'Expense Planner' is an application used to keep tab on user's expenses.It consists of beautiful userfriendly UI along with a chart to show the amount of expenses incurred on each item.
 
+![5gbcnq](https://user-images.githubusercontent.com/65438833/125430426-8643af20-f497-46bf-8bb8-1d2a63cfbdd2.gif)
+
 ![expensePlanner](https://user-images.githubusercontent.com/65438833/125024032-bc63a180-e09f-11eb-8ef4-136a60706954.gif)
 
 ![5g7k6a](https://user-images.githubusercontent.com/65438833/125273802-057c5580-e32d-11eb-87b2-37e560f8fbcd.gif)
