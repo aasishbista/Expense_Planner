@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
       title: "Expense Plannner",
       home: MyHomePage(),
       theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.pink[200],
+          primarySwatch: Colors.deepPurple,
+          accentColor: Colors.purple[700],
           fontFamily: "Oswald",
-          scaffoldBackgroundColor: Colors.purple[100],
+          scaffoldBackgroundColor: Colors.white70,
           textTheme: ThemeData.light().textTheme.copyWith(
               headline6: TextStyle(
                 fontFamily: "OpenSans",
@@ -97,6 +97,23 @@ class _MyHomePageState extends State<MyHomePage> {
     print(_userTransactionsList);
   }
 
+  void _deleteTx(int index) {
+    setState(() {
+      _userTransactionsList.removeAt(index);
+    });
+  }
+
+//Mark:- Delete transaction by Id -> String using remove where.
+  // void _deleteTransaction(String txId) {
+  //   setState(() {
+  //     _userTransactionsList.removeWhere((tx) {
+  //       return tx.id == txId;
+  //     });
+  //   });
+
+  //   print("{Transaction $txId removed}");
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: [
                 Chart(_recentSevenDaysTransactions),
-                TransactonList(_userTransactionsList),
+                TransactonList(_userTransactionsList, _deleteTx),
               ],
             ),
           ),

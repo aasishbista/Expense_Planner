@@ -5,19 +5,25 @@ import 'package:real_expense_planner/models/transaction.dart';
 
 class TransactonList extends StatelessWidget {
   final List<Transaction> _transactionList;
+  final Function _deleteTransaction;
 
-  TransactonList(this._transactionList);
+  TransactonList(this._transactionList, this._deleteTransaction);
 
   @override
   Widget build(BuildContext context) {
     // ListView.builder should be used instead of ListView as it helps
     //to optimize memory and improves app performance.
-    //It does not render invisible widgets like Row,Column,Container so less meemory is used.
+    //It does not render invisible widgets like Row,Column,Container so less memory is used.
     return Container(
-        height: 350,
+        //We will set the height dynamically
+        height: 400,
         child: _transactionList.isEmpty
             ? NoTransaction()
             : ListView.builder(
+                cacheExtent: 100.0,
+                // addAutomaticKeepAlives helps in garbageCollection
+                // and saves memory when UI is out of view which minimizes app crash.
+                // addAutomaticKeepAlives: false,
                 itemBuilder: (context, index) {
                   return Card(
                     margin: EdgeInsets.all(5),
@@ -44,6 +50,19 @@ class TransactonList extends StatelessWidget {
                         ),
                         subtitle: Text(
                             '${DateFormat.yMMMMd().format(_transactionList[index].date)}'),
+                        trailing: IconButton(
+                          icon: CircleAvatar(
+                            backgroundColor: Theme.of(context).errorColor,
+                            child: Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                            ),
+                          ),
+                          color: Theme.of(context).errorColor,
+                          onPressed: () {
+                            _deleteTransaction(index);
+                          },
+                        ),
                       ),
                     ),
                   );

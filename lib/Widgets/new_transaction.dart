@@ -73,15 +73,43 @@ class _NewTransactionState extends State<NewTransaction> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            TextField(
-              decoration: InputDecoration(labelText: "Title"),
+            TextFormField(
+              cursorColor: Colors.pink,
+              decoration: InputDecoration(
+                icon: Icon(Icons.title_sharp),
+                suffixIcon: Icon(Icons.check_circle),
+                labelText: "Title",
+                labelStyle: TextStyle(color: Theme.of(context).primaryColor),
+                helperText: "Name of Transaction",
+                // helperStyle: TextStyle(color: Theme.of(context).primaryColor),
+                enabledBorder: UnderlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Theme.of(context).primaryColor)),
+              ),
+
               controller: titleController,
-              onSubmitted: (_) {
+              maxLength: 50,
+
+              onFieldSubmitted: (_) {
                 _dataSubmitted();
               },
+              // onSubmitted: (_) {
+              //   _dataSubmitted();
+              // },
             ),
             TextField(
-              decoration: InputDecoration(labelText: "Amount"),
+              maxLength: 30,
+              cursorColor: Colors.pink,
+              decoration: InputDecoration(
+                  labelText: "Amount",
+                  labelStyle: TextStyle(color: Theme.of(context).primaryColor),
+                  helperText: "Transaction Amount",
+                  // helperStyle: TextStyle(color: Theme.of(context).primaryColor),
+                  icon: Icon(Icons.monetization_on),
+                  suffixIcon: Icon(Icons.check_circle),
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Theme.of(context).primaryColor))),
               controller: amountController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               onSubmitted: (_) => _dataSubmitted(),
