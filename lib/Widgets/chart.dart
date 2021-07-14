@@ -45,32 +45,31 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(groupedTransactionsByWeekDay);
-    return Container(
-      child: Card(
-        elevation: 10,
-        //Padding can be used instead of container if you just want to introduce some padding.
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ...groupedTransactionsByWeekDay
-                  .map((data) {
-                    //Flexible helps to equally space items even if items are large
-                    return Flexible(
-                      fit: FlexFit.tight,
-                      child: ChartBar(
-                        percentOfTotalSpending:
-                            ((data['amount'] as double) / weeklyTotalSpending),
-                        totalSpentAmount: data['amount'],
-                        weekDayLabel: data['day'],
-                      ),
-                    );
-                  })
-                  .toList()
-                  .reversed
-            ],
-          ),
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      elevation: 10,
+      //Padding can be used instead of container if you just want to introduce some padding.
+      child: Padding(
+        padding: EdgeInsets.all(20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ...groupedTransactionsByWeekDay
+                .map((data) {
+                  //Flexible helps to equally space items even if items are large
+                  return Flexible(
+                    fit: FlexFit.tight,
+                    child: ChartBar(
+                      percentOfTotalSpending:
+                          ((data['amount'] as double) / weeklyTotalSpending),
+                      totalSpentAmount: data['amount'],
+                      weekDayLabel: data['day'],
+                    ),
+                  );
+                })
+                .toList()
+                .reversed
+          ],
         ),
       ),
     );

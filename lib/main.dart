@@ -116,37 +116,55 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Expense Planner",
-        ),
-        actions: [
-          IconButton(
-            onPressed: () => _startAddNewTransaction(context),
-            icon: Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-          )
-        ],
+    final appBar = AppBar(
+      title: Text(
+        "Expense Planner",
       ),
+      actions: [
+        IconButton(
+          onPressed: () => _startAddNewTransaction(context),
+          icon: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        )
+      ],
+    );
+    final topStatusBarHeight = MediaQuery.of(context).padding.top;
+
+    final appBarHeight = appBar.preferredSize.height;
+
+    final chartHeight = (MediaQuery.of(context).size.height -
+            appBarHeight -
+            topStatusBarHeight) *
+        0.3;
+
+    final transactionListHeight = (MediaQuery.of(context).size.height -
+            appBarHeight -
+            topStatusBarHeight) *
+        0.7;
+
+    return Scaffold(
+      appBar: appBar,
       // Whole body must be wrapped by SingleChildScrollView to prevent
       // overflow caused by keyboard as keyboard takes textfield height as padding.
 
       body: SingleChildScrollView(
-        child: Center(
-          child: Container(
-            padding: EdgeInsets.all(7),
-            child: Column(
-              children: [
-                Chart(_recentSevenDaysTransactions),
-                TransactonList(_userTransactionsList, _deleteTx),
-              ],
-            ),
-          ),
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Container(
+                // Here we deduct the appBar height and the top notch height to set hte height dynamically.
+                height: chartHeight,
+                padding: EdgeInsets.all(7),
+                child: Chart(_recentSevenDaysTransactions)),
+            Container(
+                height: transactionListHeight,
+                child: TransactonList(_userTransactionsList, _deleteTx)),
+          ],
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
