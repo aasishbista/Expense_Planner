@@ -17,7 +17,8 @@ class TransactonList extends StatelessWidget {
     return _transactionList.isEmpty
         ? NoTransaction()
         : ListView.builder(
-            cacheExtent: 100.0,
+            //ListView is scrollable
+            // cacheExtent: 100.0,
             // addAutomaticKeepAlives helps in garbageCollection
             // and saves memory when UI is out of view which minimizes app crash.
             // addAutomaticKeepAlives: false,

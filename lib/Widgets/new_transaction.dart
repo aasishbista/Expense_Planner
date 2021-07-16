@@ -66,88 +66,96 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 10,
-      child: Container(
-        margin: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextFormField(
-              cursorColor: Colors.pink,
-              decoration: InputDecoration(
-                icon: Icon(
-                  Icons.title_sharp,
-                  color: Theme.of(context).primaryColor,
-                ),
-
-                suffixIcon: Icon(Icons.check_circle),
-                labelText: "Title",
-                labelStyle: TextStyle(color: Theme.of(context).primaryColor),
-                helperText: "Name of Transaction",
-                // helperStyle: TextStyle(color: Theme.of(context).primaryColor),
-                enabledBorder: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Theme.of(context).primaryColor)),
-              ),
-
-              controller: titleController,
-              maxLength: 50,
-
-              onFieldSubmitted: (_) {
-                _dataSubmitted();
-              },
-              // onSubmitted: (_) {
-              //   _dataSubmitted();
-              // },
-            ),
-            TextField(
-              maxLength: 30,
-              cursorColor: Colors.pink,
-              decoration: InputDecoration(
-                  labelText: "Amount",
-                  labelStyle: TextStyle(color: Theme.of(context).primaryColor),
-                  helperText: "Transaction Amount",
-                  // helperStyle: TextStyle(color: Theme.of(context).primaryColor),
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 10,
+        child: Container(
+          padding: EdgeInsets.only(
+              left: 10,
+              right: 10,
+              top: 10,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextFormField(
+                cursorColor: Colors.pink,
+                decoration: InputDecoration(
                   icon: Icon(
-                    Icons.monetization_on,
+                    Icons.title_sharp,
                     color: Theme.of(context).primaryColor,
                   ),
+
                   suffixIcon: Icon(Icons.check_circle),
+                  labelText: "Title",
+                  labelStyle: TextStyle(color: Theme.of(context).primaryColor),
+                  helperText: "Name of Transaction",
+                  // helperStyle: TextStyle(color: Theme.of(context).primaryColor),
                   enabledBorder: UnderlineInputBorder(
                       borderSide:
-                          BorderSide(color: Theme.of(context).primaryColor))),
-              controller: amountController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _dataSubmitted(),
-            ),
-            Container(
-              height: 50,
-              child: Row(children: [
-                Expanded(
-                    child: Text(
-                  _chosenDate == null
-                      ? "No Date chosen"
-                      : 'Date chosen : ${DateFormat.yMd().format(_chosenDate)}',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )),
-                TextButton(
-                  onPressed: _presentDatePicker,
-                  child: Text(
-                    "Choose Date",
+                          BorderSide(color: Theme.of(context).primaryColor)),
+                ),
+
+                controller: titleController,
+                maxLength: 50,
+
+                onFieldSubmitted: (_) {
+                  _dataSubmitted();
+                },
+                // onSubmitted: (_) {
+                //   _dataSubmitted();
+                // },
+              ),
+              TextField(
+                maxLength: 30,
+                cursorColor: Colors.pink,
+                decoration: InputDecoration(
+                    labelText: "Amount",
+                    labelStyle:
+                        TextStyle(color: Theme.of(context).primaryColor),
+                    helperText: "Transaction Amount",
+                    // helperStyle: TextStyle(color: Theme.of(context).primaryColor),
+                    icon: Icon(
+                      Icons.monetization_on,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    suffixIcon: Icon(Icons.check_circle),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Theme.of(context).primaryColor))),
+                controller: amountController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _dataSubmitted(),
+              ),
+              Container(
+                height: 50,
+                child: Row(children: [
+                  Expanded(
+                      child: Text(
+                    _chosenDate == null
+                        ? "No Date chosen"
+                        : 'Date chosen : ${DateFormat.yMd().format(_chosenDate)}',
                     style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                )
-              ]),
-            ),
-            ElevatedButton(
-              onPressed: _dataSubmitted,
-              child: Text('Add Transaction'),
-              style: ElevatedButton.styleFrom(
-                  onPrimary: Theme.of(context).textTheme.button.color,
-                  primary: Theme.of(context).primaryColor),
-            )
-          ],
+                  )),
+                  TextButton(
+                    onPressed: _presentDatePicker,
+                    child: Text(
+                      "Choose Date",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ]),
+              ),
+              ElevatedButton(
+                onPressed: _dataSubmitted,
+                child: Text('Add Transaction'),
+                style: ElevatedButton.styleFrom(
+                    onPrimary: Theme.of(context).textTheme.button.color,
+                    primary: Theme.of(context).primaryColor),
+              )
+            ],
+          ),
         ),
       ),
     );

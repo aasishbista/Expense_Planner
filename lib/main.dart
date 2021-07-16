@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
 import 'package:real_expense_planner/Widgets/new_transaction.dart';
 import 'package:real_expense_planner/Widgets/transaction_list.dart';
 import 'models/transaction.dart';
 import './widgets/chart.dart';
 
 void main() {
+  //To prevent landacape mode
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations(
+  //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(MyApp());
 }
 
@@ -59,6 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
         context: ctx,
+        isScrollControlled: true,
+        isDismissible: true,
         builder: (bctx) {
           return NewTransaction(_addNewTransaction);
         });
@@ -70,6 +77,8 @@ class _MyHomePageState extends State<MyHomePage> {
     //     id: "1", title: "New tee shirt", amount: 25, date: DateTime.now()),
     // Transaction(id: "2", title: "New tie", amount: 10.99, date: DateTime.now())
   ];
+
+  bool _showChartToggle = false;
 
 //To filter out last seven days transactions
   List<Transaction> get _recentSevenDaysTransactions {
@@ -134,15 +143,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final appBarHeight = appBar.preferredSize.height;
 
-    final chartHeight = (MediaQuery.of(context).size.height -
-            appBarHeight -
-            topStatusBarHeight) *
-        0.3;
+    final _safeAreaLayoutHeight =
+        MediaQuery.of(context).size.height - appBarHeight - topStatusBarHeight;
 
-    final transactionListHeight = (MediaQuery.of(context).size.height -
-            appBarHeight -
-            topStatusBarHeight) *
-        0.7;
+    final _transactionListTileWidget = Container(
+        height: _safeAreaLayoutHeight * 0.7,
+        child: TransactonList(_userTransactionsList, _deleteTx));
+
+//MediaQuery determines orientation during each build
+//for each build run we will never reassign it so final.
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Scaffold(
       appBar: appBar,
@@ -151,18 +162,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Container(
-                // Here we deduct the appBar height and the top notch height to set hte height dynamically.
-                height: chartHeight,
-                padding: EdgeInsets.all(7),
-                child: Chart(_recentSevenDaysTransactions)),
-            Container(
-                height: transactionListHeight,
-                child: TransactonList(_userTransactionsList, _deleteTx)),
-          ],
-        ),
+        child: isLandscape
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Show chart',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      Switch(
+                          value: _showChartToggle,
+                          onChanged: (value) {
+                            setState(() {
+                              _showChartToggle = value;
+                            });
+                          })
+                    ],
+                  ),
+// this type of if statement (inlist If Statemnet )can only be used in list
+                  if (_showChartToggle)
+                    Container(
+                      height: _safeAreaLayoutHeight * 0.7,
+                      child: Chart(_recentSevenDaysTransactions),
+                    ),
+                  if (!_showChartToggle)
+                    Container(
+                      height: _safeAreaLayoutHeight * 0.8,
+                      child: _transactionListTileWidget,
+                    ),
+                  // _transactionListTileWidget,
+                ],
+              )
+            : Column(
+                children: [
+                  Container(
+                      // Here we deduct the appBar height and the top notch height to set hte height dynamically.
+                      height: _safeAreaLayoutHeight * 0.3,
+                      padding: EdgeInsets.all(7),
+                      child: Chart(_recentSevenDaysTransactions)),
+                  _transactionListTileWidget
+                ],
+              ),
       ),
 
       floatingActionButton: FloatingActionButton(
