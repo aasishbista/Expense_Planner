@@ -139,12 +139,15 @@ class _MyHomePageState extends State<MyHomePage> {
         )
       ],
     );
-    final topStatusBarHeight = MediaQuery.of(context).padding.top;
+
+    final mediaQuery = MediaQuery.of(context);
+
+    final topStatusBarHeight = mediaQuery.padding.top;
 
     final appBarHeight = appBar.preferredSize.height;
 
     final _safeAreaLayoutHeight =
-        MediaQuery.of(context).size.height - appBarHeight - topStatusBarHeight;
+        mediaQuery.size.height - appBarHeight - topStatusBarHeight;
 
     final _transactionListTileWidget = Container(
         height: _safeAreaLayoutHeight * 0.7,
@@ -152,8 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 //MediaQuery determines orientation during each build
 //for each build run we will never reassign it so final.
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     return Scaffold(
       appBar: appBar,

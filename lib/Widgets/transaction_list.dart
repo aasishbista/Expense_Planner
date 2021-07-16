@@ -11,6 +11,8 @@ class TransactonList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     // ListView.builder should be used instead of ListView as it helps
     //to optimize memory and improves app performance.
     //It does not render invisible widgets like Row,Column,Container so less memory is used.
@@ -47,19 +49,33 @@ class TransactonList extends StatelessWidget {
                     ),
                     subtitle: Text(
                         '${DateFormat.yMMMMd().format(_transactionList[index].date)}'),
-                    trailing: IconButton(
-                      icon: CircleAvatar(
-                        backgroundColor: Theme.of(context).errorColor,
-                        child: Icon(
-                          Icons.delete,
-                          color: Colors.white,
-                        ),
-                      ),
-                      color: Theme.of(context).errorColor,
-                      onPressed: () {
-                        _deleteTransaction(index);
-                      },
-                    ),
+                    //Rendering UI differently according to device size.
+                    trailing: mediaQuery.size.width > 360
+                        ? TextButton.icon(
+                            onPressed: () {
+                              _deleteTransaction(index);
+                            },
+                            icon: Icon(
+                              Icons.delete,
+                              color: Theme.of(context).errorColor,
+                            ),
+                            label: Text(
+                              "Delete transaction",
+                              style: TextStyle(
+                                  color: Theme.of(context).errorColor),
+                            ))
+                        : IconButton(
+                            icon: CircleAvatar(
+                              backgroundColor: Theme.of(context).errorColor,
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onPressed: () {
+                              _deleteTransaction(index);
+                            },
+                          ),
                   ),
                 ),
               );
