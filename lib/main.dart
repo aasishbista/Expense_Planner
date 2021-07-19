@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:real_expense_planner/Widgets/new_transaction.dart';
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: AppBarTheme(
               textTheme: ThemeData.light().textTheme.copyWith(
                   headline6: TextStyle(
-                      fontFamily: "OpenSans",
+                      fontFamily: "Quicksand",
                       fontSize: 20,
                       fontWeight: FontWeight.bold)))),
     );
@@ -125,20 +128,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final appBar = AppBar(
-      title: Text(
-        "Expense Planner",
-      ),
-      actions: [
-        IconButton(
-          onPressed: () => _startAddNewTransaction(context),
-          icon: Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-        )
-      ],
-    );
+    final PreferredSizeWidget appBar = Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text(
+              "Expense Planner",
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Theme.of(context).primaryColor,
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  child: Icon(
+                    CupertinoIcons.add,
+                    color: Colors.white,
+                  ),
+                  onTap: () => _startAddNewTransaction(context),
+                )
+              ],
+            ))
+        : AppBar(
+            title: Text(
+              "Expense Planner",
+            ),
+            actions: [
+              IconButton(
+                onPressed: () => _startAddNewTransaction(context),
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              )
+            ],
+          );
 
     final mediaQuery = MediaQuery.of(context);
 
@@ -153,16 +175,10 @@ class _MyHomePageState extends State<MyHomePage> {
         height: _safeAreaLayoutHeight * 0.7,
         child: TransactonList(_userTransactionsList, _deleteTx));
 
-//MediaQuery determines orientation during each build
-//for each build run we will never reassign it so final.
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
 
-    return Scaffold(
-      appBar: appBar,
-      // Whole body must be wrapped by SingleChildScrollView to prevent
-      // overflow caused by keyboard as keyboard takes textfield height as padding.
-
-      body: SingleChildScrollView(
+    final pageBody = SafeArea(
+      child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: isLandscape
             ? Column(
@@ -175,13 +191,23 @@ class _MyHomePageState extends State<MyHomePage> {
                         'Show chart',
                         style: Theme.of(context).textTheme.headline6,
                       ),
-                      Switch(
-                          value: _showChartToggle,
-                          onChanged: (value) {
-                            setState(() {
-                              _showChartToggle = value;
-                            });
-                          })
+                      Platform.isIOS
+                          ? CupertinoSwitch(
+                              value: _showChartToggle,
+                              activeColor: Theme.of(context).accentColor,
+                              onChanged: (val) {
+                                setState(() {
+                                  _showChartToggle = val;
+                                });
+                              },
+                            )
+                          : Switch(
+                              value: _showChartToggle,
+                              onChanged: (value) {
+                                setState(() {
+                                  _showChartToggle = value;
+                                });
+                              })
                     ],
                   ),
 // this type of if statement (inlist If Statemnet )can only be used in list
@@ -209,12 +235,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
       ),
-
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransaction(context),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+
+//MediaQuery determines orientation during each build
+//for each build run we will never reassign it so final.
+
+    return Platform.isIOS
+        ? CupertinoPageScaffold(navigationBar: appBar, child: pageBody)
+        : Scaffold(
+            appBar: appBar,
+            // Whole body must be wrapped by SingleChildScrollView to prevent
+            // overflow caused by keyboard as keyboard takes textfield height as padding.
+
+            body: pageBody,
+
+            floatingActionButton: Platform.isIOS
+                ? Container()
+                : FloatingActionButton(
+                    child: Icon(Icons.add),
+                    onPressed: () => _startAddNewTransaction(context),
+                  ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+          );
   }
 }
