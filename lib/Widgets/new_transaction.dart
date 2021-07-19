@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:real_expense_planner/Widgets/PlatformAdaptiveButtons/adaptive_elevatedBg_button.dart';
+import 'PlatformAdaptiveButtons/adaptive_elevatedBg_button.dart';
 import 'PlatformAdaptiveButtons/adaptive_Text_Button.dart';
 
 // NewTransaction
@@ -101,6 +101,10 @@ class _NewTransactionState extends State<NewTransaction> {
                         Icons.check_circle,
                         color: Theme.of(context).primaryColor,
                       ),
+                      controller: titleController,
+                      onSubmitted: (_) {
+                        _dataSubmitted();
+                      },
                     )
                   : TextFormField(
                       cursorColor: Colors.pink,
@@ -126,6 +130,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     ),
               Platform.isIOS
                   ? CupertinoTextField.borderless(
+                      keyboardType: TextInputType.number,
                       cursorColor: Colors.pink,
                       placeholder: "Amount",
                       prefixMode: OverlayVisibilityMode.always,
@@ -140,6 +145,10 @@ class _NewTransactionState extends State<NewTransaction> {
                         Icons.check_circle,
                         color: Theme.of(context).primaryColor,
                       ),
+                      controller: amountController,
+                      onSubmitted: (_) {
+                        _dataSubmitted();
+                      },
                     )
                   : TextField(
                       maxLength: 30,
