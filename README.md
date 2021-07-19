@@ -10,6 +10,7 @@ Following gifs consist of different stages during my application development.
 ### Final App Demo!
 
 ![5gbcnq](https://user-images.githubusercontent.com/65438833/125430426-8643af20-f497-46bf-8bb8-1d2a63cfbdd2.gif) ![5gbdm5](https://user-images.githubusercontent.com/65438833/125432358-bffc6a81-96c5-4c72-87ef-13f03a330b09.gif)
+
 ![5gy9by](https://user-images.githubusercontent.com/65438833/126153553-132679e5-34cc-44a2-a460-114d0918d9ce.gif)
 
 
