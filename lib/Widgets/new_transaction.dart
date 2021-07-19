@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:real_expense_planner/Widgets/PlatformAdaptiveButtons/adaptive_elevatedBg_button.dart';
-import ' Platform Adaptive Buttons/adaptive_Text_Button.dart';
+import 'PlatformAdaptiveButtons/adaptive_Text_Button.dart';
 
 // NewTransaction
 class NewTransaction extends StatefulWidget {
