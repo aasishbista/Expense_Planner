@@ -11,9 +11,11 @@ Following gifs consist of different stages during my application development.
 
 ![5gbcnq](https://user-images.githubusercontent.com/65438833/125430426-8643af20-f497-46bf-8bb8-1d2a63cfbdd2.gif) ![5gbdm5](https://user-images.githubusercontent.com/65438833/125432358-bffc6a81-96c5-4c72-87ef-13f03a330b09.gif)
 
+###Landscape mode in android Platform
+![5gy9by](https://user-images.githubusercontent.com/65438833/126153553-132679e5-34cc-44a2-a460-114d0918d9ce.gif)![5gy9er](https://user-images.githubusercontent.com/65438833/126153890-3b6f7bac-84fe-46f2-8e24-6045f729e8e6.gif)
 
-![5gy9by](https://user-images.githubusercontent.com/65438833/126153553-132679e5-34cc-44a2-a460-114d0918d9ce.gif)![5gy9er](https://user-images.githubusercontent.com/65438833/126153890-3b6f7bac-84fe-46f2-8e24-6045f729e8e6.gif)![5gy9m0](https://user-images.githubusercontent.com/65438833/126154062-d983de38-c79c-4af0-8d6e-b34b3350aaec.gif)
-![5gy9od](https://user-images.githubusercontent.com/65438833/126154087-e087faad-794c-49ca-9b22-50bc0d172154.gif)
+###Landscape mode in iOS Platform
+![5gy9m0](https://user-images.githubusercontent.com/65438833/126154062-d983de38-c79c-4af0-8d6e-b34b3350aaec.gif)![5gy9od](https://user-images.githubusercontent.com/65438833/126154087-e087faad-794c-49ca-9b22-50bc0d172154.gif)
 
 
 
