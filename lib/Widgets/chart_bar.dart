@@ -5,7 +5,7 @@ class ChartBar extends StatelessWidget {
   final String weekDayLabel;
   final double percentOfTotalSpending;
 
-  ChartBar(
+  const ChartBar(
       {this.totalSpentAmount, this.weekDayLabel, this.percentOfTotalSpending});
 
   @override
