@@ -95,13 +95,14 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount, DateTime txDate) {
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime txDate, int txNumberOfItems) {
     final newTransaction = Transaction(
-      id: DateTime.now().toString(),
-      title: txTitle,
-      amount: txAmount,
-      date: txDate,
-    );
+        id: DateTime.now().toString(),
+        title: txTitle,
+        amount: txAmount,
+        date: txDate,
+        numberOfItems: txNumberOfItems);
 
     setState(() {
       _userTransactionsList.add(newTransaction);
@@ -132,14 +133,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ? CupertinoNavigationBar(
             middle: Text(
               "Expense Planner",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
             backgroundColor: Theme.of(context).primaryColor,
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
-                  child: Icon(
+                  child: const Icon(
                     CupertinoIcons.add,
                     color: Colors.white,
                   ),
@@ -154,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
             actions: [
               IconButton(
                 onPressed: () => _startAddNewTransaction(context),
-                icon: Icon(
+                icon: const Icon(
                   Icons.add,
                   color: Colors.white,
                 ),

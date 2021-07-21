@@ -47,8 +47,25 @@ class TransactonList extends StatelessWidget {
                       '${_transactionList[index].title}',
                       style: Theme.of(context).textTheme.headline6,
                     ),
-                    subtitle: Text(
-                        '${DateFormat.yMMMMd().format(_transactionList[index].date)}'),
+
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 3),
+                          child: Text(
+                              '${DateFormat.yMMMMd().format(_transactionList[index].date)}'),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 3),
+                          child: Text(
+                            "No of items: ${_transactionList[index].numberOfItems}",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      ],
+                    ),
+                    isThreeLine: true,
                     //Rendering UI differently according to device size.
                     trailing: mediaQuery.size.width > 360
                         ? TextButton.icon(

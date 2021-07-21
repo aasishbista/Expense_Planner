@@ -20,7 +20,7 @@ class NoTransaction extends StatelessWidget {
             ),
             Container(
               height: constraints.maxHeight * 0.6,
-              child: Image.asset(
+              child:Image.asset(
                 "Assets/images/waiting.png",
                 fit: BoxFit.cover,
               ),

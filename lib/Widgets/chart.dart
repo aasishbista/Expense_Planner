@@ -6,7 +6,7 @@ import 'chart_bar.dart';
 class Chart extends StatelessWidget {
   ///last sev days transactions
   final List<Transaction> recentWeekTransactions;
-  Chart(this.recentWeekTransactions);
+  const Chart(this.recentWeekTransactions);
 
 // groupedTransactionsByWeekDay is a List of Map(i.e. Key Value pair)
 //containing days and amount spent in the day.
@@ -58,7 +58,7 @@ class Chart extends StatelessWidget {
                 .map((data) {
                   //Flexible helps to equally space items even if items are large
                   return Flexible(
-                    fit: FlexFit.tight,
+                    fit:FlexFit.tight,
                     child: ChartBar(
                       percentOfTotalSpending:
                           ((data['amount'] as double) / weeklyTotalSpending),

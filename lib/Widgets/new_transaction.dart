@@ -22,6 +22,8 @@ class _NewTransactionState extends State<NewTransaction> {
 
   DateTime _chosenDate;
 
+  int numberOFItems = 0;
+
   void _dataSubmitted() {
     // It ensures that error is not raised when empty amount
     //is enters and addTx button is pressed as function is simply returned.
@@ -31,19 +33,20 @@ class _NewTransactionState extends State<NewTransaction> {
     String enteredTitle = titleController.text;
     double enteredAmount = double.parse(amountController.text);
     DateTime enteredDate = _chosenDate;
+    int enteredNumberOfItems = numberOFItems;
 
 //Validation for amount and title.
-    if (enteredTitle.isEmpty || enteredAmount <= 0 || enteredDate == null) {
+    if (enteredTitle.isEmpty ||
+        enteredAmount <= 0 ||
+        enteredDate == null ||
+        enteredNumberOfItems == 0) {
       print("Invalid input");
       return;
     }
 
     //If validation is not satisfied newTransactionAdded willl not be called.
     widget.addNewTransaction(
-      enteredTitle,
-      enteredAmount,
-      enteredDate,
-    );
+        enteredTitle, enteredAmount, enteredDate, enteredNumberOfItems);
 
 // Helps to close modal sheet automatically after data is submitted.
 //Closes the topmost screen which is modal sheet in this case.
@@ -91,7 +94,7 @@ class _NewTransactionState extends State<NewTransaction> {
                       placeholder: "Title",
                       prefixMode: OverlayVisibilityMode.always,
                       suffixMode: OverlayVisibilityMode.always,
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       prefix: Icon(
                         Icons.title_sharp,
                         color: Theme.of(context).primaryColor,
@@ -140,7 +143,7 @@ class _NewTransactionState extends State<NewTransaction> {
                         color: Theme.of(context).primaryColor,
                       ),
                       maxLength: 50,
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       suffix: Icon(
                         Icons.check_circle,
                         color: Theme.of(context).primaryColor,
@@ -172,6 +175,36 @@ class _NewTransactionState extends State<NewTransaction> {
                           TextInputType.numberWithOptions(decimal: true),
                       onSubmitted: (_) => _dataSubmitted(),
                     ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Number of items taken : ",
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor, fontSize: 14),
+                  ),
+                  IconButton(
+                      color: Theme.of(context).primaryColor,
+                      onPressed: () {
+                        setState(() {
+                          numberOFItems > 0
+                              ? numberOFItems -= 1
+                              : numberOFItems = 0;
+                        });
+                      },
+                      icon: Icon(Icons.remove)),
+                  Text('$numberOFItems',
+                      style: Theme.of(context).textTheme.headline6),
+                  IconButton(
+                      color: Theme.of(context).primaryColor,
+                      onPressed: () {
+                        setState(() {
+                          numberOFItems += 1;
+                        });
+                      },
+                      icon: Icon(Icons.add))
+                ],
+              ),
               Container(
                 height: 50,
                 child: Row(children: [
