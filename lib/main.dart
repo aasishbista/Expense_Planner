@@ -172,6 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final _safeAreaLayoutHeight =
         mediaQuery.size.height - appBarHeight - topStatusBarHeight;
 
+// transactionListTileWidget
     final _transactionListTileWidget = Container(
         height: _safeAreaLayoutHeight * 0.7,
         child: TransactonList(_userTransactionsList, _deleteTx));
