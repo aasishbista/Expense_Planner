@@ -9,7 +9,7 @@ Following gifs consist of different stages during my application development.
 
 ### Final App Demo!
 
-![5gbcnq](https://user-images.githubusercontent.com/65438833/125430426-8643af20-f497-46bf-8bb8-1d2a63cfbdd2.gif) ![5gbdm5](https://user-images.githubusercontent.com/65438833/125432358-bffc6a81-96c5-4c72-87ef-13f03a330b09.gif)
+![5gbcnq](https://user-images.githubusercontent.com/65438833/125430426-8643af20-f497-46bf-8bb8-1d2a63cfbdd2.gif) ![5gbdm5](https://user-images.githubusercontent.com/65438833/125432358-bffc6a81-96c5-4c72-87ef-13f03a330b09.gif)![5h5bl7](https://user-images.githubusercontent.com/65438833/126440259-0805e574-40d4-426f-9fda-4d9d1001d0fb.gif)![5h5bj1](https://user-images.githubusercontent.com/65438833/126440303-e60a021e-5d0d-45f2-b3e8-bb9f54b7fc0f.gif)
 
 ### Landscape mode in android Platform
 ![5h5b4k](https://user-images.githubusercontent.com/65438833/126439585-e729abe4-cff9-49e9-aef6-2f22c507a740.gif)![5gy9er](https://user-images.githubusercontent.com/65438833/126153890-3b6f7bac-84fe-46f2-8e24-6045f729e8e6.gif)
