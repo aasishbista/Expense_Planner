@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import '/models/transaction.dart';
 import 'package:intl/intl.dart';
 
-class TransactionListTile extends StatelessWidget {
-  const TransactionListTile({
+//Single transaction item
+class TransactionItem extends StatelessWidget {
+  const TransactionItem({
     Key key,
     @required this.transaction,
     @required this.deleteTransaction,

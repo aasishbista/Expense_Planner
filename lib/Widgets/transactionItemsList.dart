@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import '/Widgets/no_transaction.dart';
 import 'package:real_expense_planner/models/transaction.dart';
-import 'txListTile.dart';
+import 'transactionItem.dart';
 
-class TransactonList extends StatelessWidget {
+class TransactonItemsList extends StatelessWidget {
   final List<Transaction> _transactionList;
   final Function _deleteTransaction;
 
-  TransactonList(this._transactionList, this._deleteTransaction);
+  TransactonItemsList(this._transactionList, this._deleteTransaction);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class TransactonList extends StatelessWidget {
         ? NoTransaction()
         : ListView.builder(
             itemBuilder: (context, index) {
-              return TransactionListTile(
+              return TransactionItem(
                   transaction: _transactionList[index],
                   deleteTransaction: () {
                     _deleteTransaction(index);

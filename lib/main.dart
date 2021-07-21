@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:real_expense_planner/Widgets/new_transaction.dart';
-import 'package:real_expense_planner/Widgets/transaction_list.dart';
+import 'package:real_expense_planner/Widgets/transactionItemsList.dart';
 import 'models/transaction.dart';
 import './widgets/chart.dart';
 
@@ -116,6 +116,70 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+//Landscape Content builder
+
+  Widget _buildLandscapeModeContent(
+      double _safeAreaHeight, Widget txListTileWidget) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Show chart',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Platform.isIOS
+                ? CupertinoSwitch(
+                    value: _showChartToggle,
+                    activeColor: Theme.of(context).accentColor,
+                    onChanged: (val) {
+                      setState(() {
+                        _showChartToggle = val;
+                      });
+                    },
+                  )
+                : Switch(
+                    value: _showChartToggle,
+                    onChanged: (value) {
+                      setState(() {
+                        _showChartToggle = value;
+                      });
+                    })
+          ],
+        ),
+// this type of if statement (inlist If Statemnet )can only be used in list
+        if (_showChartToggle)
+          Container(
+            height: _safeAreaHeight * 0.7,
+            child: Chart(_recentSevenDaysTransactions),
+          ),
+        if (!_showChartToggle)
+          Container(
+            height: _safeAreaHeight * 0.8,
+            child: txListTileWidget,
+          ),
+        // _transactionListTileWidget,
+      ],
+    );
+  }
+
+// Portrait mode content builder
+  Widget _buildPortraitModeContent(
+      double _safeAreaHeight, Widget txListTileWidget) {
+    return Column(
+      children: [
+        Container(
+            // Here we deduct the appBar height and the top notch height to set hte height dynamically.
+            height: _safeAreaHeight * 0.3,
+            padding: EdgeInsets.all(7),
+            child: Chart(_recentSevenDaysTransactions)),
+        txListTileWidget
+      ],
+    );
+  }
+
 //Mark:- Delete transaction by Id -> String using remove where.
   // void _deleteTransaction(String txId) {
   //   setState(() {
@@ -163,19 +227,20 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           );
 
+//mediaQuery
     final mediaQuery = MediaQuery.of(context);
-
+// topStatusBarHeight
     final topStatusBarHeight = mediaQuery.padding.top;
-
+// appBarHeight
     final appBarHeight = appBar.preferredSize.height;
-
+//safeAreaLayoutHeight
     final _safeAreaLayoutHeight =
         mediaQuery.size.height - appBarHeight - topStatusBarHeight;
 
 // transactionListTileWidget
     final _transactionListTileWidget = Container(
         height: _safeAreaLayoutHeight * 0.7,
-        child: TransactonList(_userTransactionsList, _deleteTx));
+        child: TransactonItemsList(_userTransactionsList, _deleteTx));
 
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
 
@@ -183,58 +248,13 @@ class _MyHomePageState extends State<MyHomePage> {
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: isLandscape
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Show chart',
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      Platform.isIOS
-                          ? CupertinoSwitch(
-                              value: _showChartToggle,
-                              activeColor: Theme.of(context).accentColor,
-                              onChanged: (val) {
-                                setState(() {
-                                  _showChartToggle = val;
-                                });
-                              },
-                            )
-                          : Switch(
-                              value: _showChartToggle,
-                              onChanged: (value) {
-                                setState(() {
-                                  _showChartToggle = value;
-                                });
-                              })
-                    ],
-                  ),
-// this type of if statement (inlist If Statemnet )can only be used in list
-                  if (_showChartToggle)
-                    Container(
-                      height: _safeAreaLayoutHeight * 0.7,
-                      child: Chart(_recentSevenDaysTransactions),
-                    ),
-                  if (!_showChartToggle)
-                    Container(
-                      height: _safeAreaLayoutHeight * 0.8,
-                      child: _transactionListTileWidget,
-                    ),
-                  // _transactionListTileWidget,
-                ],
+            ? _buildLandscapeModeContent(
+                _safeAreaLayoutHeight,
+                _transactionListTileWidget,
               )
-            : Column(
-                children: [
-                  Container(
-                      // Here we deduct the appBar height and the top notch height to set hte height dynamically.
-                      height: _safeAreaLayoutHeight * 0.3,
-                      padding: EdgeInsets.all(7),
-                      child: Chart(_recentSevenDaysTransactions)),
-                  _transactionListTileWidget
-                ],
+            : _buildPortraitModeContent(
+                _safeAreaLayoutHeight,
+                _transactionListTileWidget,
               ),
       ),
     );
