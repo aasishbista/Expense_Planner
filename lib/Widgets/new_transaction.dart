@@ -102,6 +102,7 @@ class _NewTransactionState extends State<NewTransaction> {
     return SingleChildScrollView(
       child: Card(
         elevation: 10,
+        //For keyboard inset
         child: Container(
           padding: EdgeInsets.only(
               left: 10,
@@ -249,8 +250,10 @@ class _NewTransactionState extends State<NewTransaction> {
                 ]),
               ),
               // Custom made elevated button or button with background for both iOS and android.
-              AdaptiveElevatedButton(
-                  text: "Add Transaction", buttonTriggered: _dataSubmitted)
+              InkWell(
+                child: AdaptiveElevatedButton(
+                    text: "Add Transaction", buttonTriggered: _dataSubmitted),
+              )
             ],
           ),
         ),

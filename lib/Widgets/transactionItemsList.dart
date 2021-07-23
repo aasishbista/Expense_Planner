@@ -19,11 +19,26 @@ class TransactonItemsList extends StatelessWidget {
         : ListView.builder(
             itemBuilder: (context, index) {
               //keys are required only for list View having stateful widget as children.
-              return TransactionItem(
-                  transaction: _transactionList[index],
-                  deleteTransaction: () {
-                    _deleteTransaction(index);
-                  });
+              // Dismissible is used to dismiss items when swiped.
+              return Dismissible(
+                key: Key(_transactionList[index].id),
+                onDismissed: (direction) {
+                  _deleteTransaction(index);
+                },
+                child: TransactionItem(
+                    transaction: _transactionList[index],
+                    deleteTransaction: () {
+                      _deleteTransaction(index);
+                    }),
+                //to give background when dismissed
+                background: Container(
+                  color: Colors.red[800],
+                  child: Text(
+                    'Item delete',
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                ),
+              );
             },
             itemCount: _transactionList.length,
           );
