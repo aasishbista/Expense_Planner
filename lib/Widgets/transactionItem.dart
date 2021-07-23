@@ -9,6 +9,7 @@ class TransactionItem extends StatelessWidget {
     @required this.transaction,
     @required this.deleteTransaction,
   }) : super(key: key);
+  //key of your widget is passed to he base flutter or parent (super) widget.
 
   final Transaction transaction;
 

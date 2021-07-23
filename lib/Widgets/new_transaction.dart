@@ -9,10 +9,15 @@ import 'PlatformAdaptiveButtons/adaptive_Text_Button.dart';
 class NewTransaction extends StatefulWidget {
   final Function addNewTransaction;
 
-  NewTransaction(this.addNewTransaction);
+  NewTransaction(this.addNewTransaction) {
+    print('Constructor New Transaction widget called');
+  }
 
   @override
-  _NewTransactionState createState() => _NewTransactionState();
+  _NewTransactionState createState() {
+    print('createState called.');
+    return _NewTransactionState();
+  }
 }
 
 class _NewTransactionState extends State<NewTransaction> {
@@ -23,6 +28,27 @@ class _NewTransactionState extends State<NewTransaction> {
   DateTime _chosenDate;
 
   int numberOFItems = 0;
+  _NewTransactionState() {
+    print('Constructor _NewTransactionState called');
+  }
+
+  @override
+  void didUpdateWidget(covariant NewTransaction oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print("didUpdateWidget");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("dispose called");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print("Init state called");
+  }
 
   void _dataSubmitted() {
     // It ensures that error is not raised when empty amount
@@ -51,7 +77,7 @@ class _NewTransactionState extends State<NewTransaction> {
 // Helps to close modal sheet automatically after data is submitted.
 //Closes the topmost screen which is modal sheet in this case.
     Navigator.of(context).pop();
-    print("Hello");
+    // print("Hello");
   }
 
   void _presentDatePicker() {

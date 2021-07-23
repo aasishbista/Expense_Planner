@@ -25,8 +25,8 @@ class Chart extends StatelessWidget {
           totalEachWeekDaySum += recentWeekTransactions[i].amount;
         }
       }
-      print(weekDay);
-      print(totalEachWeekDaySum);
+      // print(weekDay);
+      // print(totalEachWeekDaySum);
       return {
         //DateFormat.E() helps to give shortcut of each weekday.
         "day": DateFormat.E().format(weekDay).substring(0, 2),
@@ -44,7 +44,7 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(groupedTransactionsByWeekDay);
+    // print(groupedTransactionsByWeekDay);
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       elevation: 10,
@@ -58,7 +58,7 @@ class Chart extends StatelessWidget {
                 .map((data) {
                   //Flexible helps to equally space items even if items are large
                   return Flexible(
-                    fit:FlexFit.tight,
+                    fit: FlexFit.tight,
                     child: ChartBar(
                       percentOfTotalSpending:
                           ((data['amount'] as double) / weeklyTotalSpending),

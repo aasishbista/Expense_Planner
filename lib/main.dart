@@ -49,7 +49,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   // void _startAddNewTransaction(BuildContext ctx) {
   //   showModalBottomSheet(
   //       context: ctx,
@@ -63,6 +63,27 @@ class _MyHomePageState extends State<MyHomePage> {
   //         );
   //       });
   // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+    print(state);
+  }
+
+// to prevent memory leak we must remove observer when closing app.
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
 
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
@@ -107,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _userTransactionsList.add(newTransaction);
     });
-    print(_userTransactionsList);
+    // print(_userTransactionsList);
   }
 
   void _deleteTx(int index) {
@@ -117,7 +138,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 //Landscape Content builder
-
   Widget _buildLandscapeModeContent(
       double _safeAreaHeight, Widget txListTileWidget) {
     return Column(

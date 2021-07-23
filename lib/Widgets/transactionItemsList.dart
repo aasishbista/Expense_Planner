@@ -18,6 +18,7 @@ class TransactonItemsList extends StatelessWidget {
         ? NoTransaction()
         : ListView.builder(
             itemBuilder: (context, index) {
+              //keys are required only for list View having stateful widget as children.
               return TransactionItem(
                   transaction: _transactionList[index],
                   deleteTransaction: () {
